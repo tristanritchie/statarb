@@ -1,0 +1,12 @@
+
+packages/.DS_Store
+.DS_Store
+API/ig-markets-api-python-library/
+packages/pyvinecopulib/
+scrap_book/copula_notepad.ipynb
+scrap_book/data/EWA_EWC.csv
+scrap_book/data/selected_pars_test.csv
+scrap_book/IG_API_notebook.ipynb
+scrap_book/r_test.r
+scrap_book/test.py
+.DS_Store
