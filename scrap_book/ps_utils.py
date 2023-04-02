@@ -122,7 +122,7 @@ def get_co_variance_matrix():
             # Numerical Integration of 4 dimensions
             co_variance_matrix[i, j] = scipy.integrate.nquad(variance_integral_func, [(0, 1)] * 4, args=(l1, l2))[0]
 
-    inds = np.tri(16, k=-1, dtype=np.bool)  # Storing the indices of elements in lower triangle.
+    inds = np.tri(16, k=-1, dtype=bool)  # Storing the indices of elements in lower triangle.
     co_variance_matrix[inds] = co_variance_matrix.T[inds]
     return np.linalg.inv(co_variance_matrix)
 
