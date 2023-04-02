@@ -10,3 +10,4 @@ scrap_book/IG_API_notebook.ipynb
 scrap_book/r_test.r
 scrap_book/test.py
 .DS_Store
+*.pyc
