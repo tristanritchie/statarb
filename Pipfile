@@ -11,6 +11,8 @@ seaborn = "*"
 ipykernel = "==6.22.0"
 statsmodels = "*"
 pyvinecopulib = "*"
+rpy2 = "*"
+black = "*"
 
 [dev-packages]
 
