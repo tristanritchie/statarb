@@ -37,7 +37,7 @@ class CMPI:
         bband = rolling.mean() + rolling.std(ddof=0) * num_std
         return bband
 
-    def generate_trading_signals(self, testing_returns: pd.DataFrame) -> pd.Series:
+    def generate_cmpi(self, testing_returns: pd.DataFrame) -> pd.Series:
         trading_periods = testing_returns.shape[0]
         copula_fit_length = self.training_returns.shape[0]
         

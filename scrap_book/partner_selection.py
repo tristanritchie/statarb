@@ -377,7 +377,7 @@ class PartnerSelection:
         returns = []
 
         for i, quadruple in enumerate(quadruples):
-            data = self.universe.loc[:, quadruple].apply(lambda x: np.log(x).diff()).cumsum()
+            data = self.universe.loc[:, quadruple].apply(lambda x: np.log(x).diff()).cumsum().dropna(how='any')
             returns.append(data)
 
         return returns

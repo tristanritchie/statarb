@@ -78,7 +78,7 @@ class CVineModel:
                     self.vc.BiCopHfunc1(
                         u1=F_list.iloc[i - 1, i - 1],
                         u2=F_list.iloc[i - 1, j - 1],
-                        obj=C_list.iloc[i - 2, j - 1],
+                        obj=C_list.iloc[i - 2, j - 1]
                     )
                 )
 
