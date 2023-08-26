@@ -3,7 +3,7 @@ import numpy as np
 
 from partner_selection import PartnerSelection
 from ps_utils import get_sector_data
-from CMPI_strategy import CMPI
+from strategy.CMPI_strategy import CMPI
 
 
 ## Partner selection

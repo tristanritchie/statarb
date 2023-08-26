@@ -2,7 +2,7 @@
 Rules:
 
 """
-from c_vine_model import CVineModel
+from copula.c_vine_model import CVineModel
 from pyvinecopulib import to_pseudo_obs
 import pandas as pd
 import matplotlib.pyplot as plt

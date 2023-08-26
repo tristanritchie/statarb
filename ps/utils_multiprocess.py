@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from ps_utils import get_sum_correlations, multivariate_rho, diagonal_measure, extremal_measure
+from ps.ps_utils import get_sum_correlations, multivariate_rho, diagonal_measure, extremal_measure
 
 
 def _traditional_correlation_loop(corr_matrix: pd.DataFrame, molecule: list) -> pd.DataFrame:

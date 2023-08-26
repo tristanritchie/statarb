@@ -5,9 +5,9 @@ import pandas as pd
 import seaborn as sns
 
 from statsmodels.distributions.empirical_distribution import ECDF
-from utils_multiprocess import run_traditional_correlation_calcs, run_extended_correlation_calcs, \
+from ps.utils_multiprocess import run_traditional_correlation_calcs, run_extended_correlation_calcs, \
     run_diagonal_measure_calcs, run_extremal_measure_calcs
-from ps_utils import get_sum_correlations, multivariate_rho, diagonal_measure, extremal_measure, get_co_variance_matrix
+from ps.ps_utils import get_sum_correlations, multivariate_rho, diagonal_measure, extremal_measure, get_co_variance_matrix
 
 
 class PartnerSelection:

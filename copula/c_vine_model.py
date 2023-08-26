@@ -27,7 +27,7 @@ class CVineModel:
 
     def fit(self, U, family=None):
         """
-        training C-Vine Copula Modeling
+        C-Vine Copula Model fitting by MLE
         U: relative rank dataframe (n by p) entre between [0,1]. First column is the target stock.
         family: list or None(default). None means all possible familys.
         """
@@ -48,7 +48,7 @@ class CVineModel:
 
     def predict(self, U, cvm=None):
         """
-        compute h for a cvm given U
+        Compute h for a cvm given U
         h:  P( X1<x1 |x2,x3,...,xp)
         U: relative rank dataframe (n * p). First column is the target stock. U = (x1,x2,x3,...,xp)
         """
