@@ -142,7 +142,7 @@ class PartnerSelection:
         return output_matrix
 
     # Method 1
-    def traditional_multiprocess(self, n_targets=5) -> list:
+    def traditional_multiprocess(self, n_targets=5, num_threads=8) -> list:
         """
         Multiprocess implementation of self.traditional.
         This method implements the first procedure described in Section 3.1.1.
@@ -157,7 +157,7 @@ class PartnerSelection:
         # Iterating on the top 50 indices for each target stock.
         for target in self.top_50_correlations.index[:n_targets]:
             quadruples = self.all_quadruples[target]  # List of unique quadruples.
-            final_quadruple = run_traditional_correlation_calcs(self.correlation_matrix, quadruples)['quadruple']
+            final_quadruple = run_traditional_correlation_calcs(self.correlation_matrix, quadruples, num_threads=num_threads)['quadruple']
             print(final_quadruple)
             # Appending the final quadruple for each target to the output matrix
             output_matrix.append(final_quadruple)
@@ -201,7 +201,7 @@ class PartnerSelection:
         return output_matrix
 
     # Method 2
-    def extended_multiprocess(self, n_targets=5) -> list:
+    def extended_multiprocess(self, n_targets=5, num_threads=8) -> list:
         """
         Multiprocess implementation of self.extended.
         This method implements the second procedure described in Section 3.1.1.
@@ -222,7 +222,7 @@ class PartnerSelection:
         # Iterating on the top 50 indices for each target stock.
         for target in self.top_50_correlations.index[:n_targets]:
             quadruples = self.all_quadruples[target]  # List of unique quadruples.
-            final_quadruple = run_extended_correlation_calcs(u, quadruples)['quadruple']
+            final_quadruple = run_extended_correlation_calcs(u, quadruples, num_threads=num_threads)['quadruple']
             print(final_quadruple)
             # Appending the final quadruple for each target to the output matrix
             output_matrix.append(final_quadruple)
@@ -259,7 +259,7 @@ class PartnerSelection:
         return output_matrix
 
     # Method 3
-    def geometric_multiprocess(self, n_targets=5) -> list:
+    def geometric_multiprocess(self, n_targets=5, num_threads=8) -> list:
         """
         Multiprocess implementation of self.geometric.
         This method implements the third procedure described in Section 3.1.1.
@@ -274,7 +274,7 @@ class PartnerSelection:
         # Iterating on the top 50 indices for each target stock.
         for target in self.top_50_correlations.index[:n_targets]:
             quadruples = self.all_quadruples[target]  # List of unique quadruples.
-            final_quadruple = run_diagonal_measure_calcs(self.ranked_returns, quadruples)['quadruple']
+            final_quadruple = run_diagonal_measure_calcs(self.ranked_returns, quadruples, num_threads=num_threads)['quadruple']
             print(final_quadruple)
             # Appending the final quadruple for each target to the output matrix
             output_matrix.append(final_quadruple)
@@ -312,7 +312,7 @@ class PartnerSelection:
         return output_matrix
 
     # Method 4
-    def extremal_multiprocess(self, n_targets=5) -> list:
+    def extremal_multiprocess(self, n_targets=5, num_threads=8) -> list:
         """
         Multiprocess implementation of self.extremal.
         This method implements the fourth procedure described in Section 3.1.1.
@@ -328,7 +328,7 @@ class PartnerSelection:
         # Iterating on the top 50 indices for each target stock.
         for target in self.top_50_correlations.index[:n_targets]:
             quadruples = self.all_quadruples[target]  # List of unique quadruples.
-            final_quadruple = run_extremal_measure_calcs(self.ranked_returns, quadruples, co_variance_matrix)[
+            final_quadruple = run_extremal_measure_calcs(self.ranked_returns, quadruples, co_variance_matrix, num_threads=num_threads)[
                 'quadruple']
             print(final_quadruple)
             # Appending the final quadruple for each target to the output matrix
