@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import multiprocessing as mp
+from itertools import repeat
 
 from ps.ps_utils import get_sum_correlations, multivariate_rho, diagonal_measure, extremal_measure
 
@@ -18,7 +20,7 @@ def _traditional_correlation_loop(corr_matrix: pd.DataFrame, molecule: list) -> 
     return pd.DataFrame(results, columns=['quadruple', 'result'])
 
 
-def run_traditional_correlation_calcs(corr_matrix: pd.DataFrame, quadruples: list, num_threads: int = 2,
+def run_traditional_correlation_calcs(corr_matrix: pd.DataFrame, quadruples: list, num_threads: int = 8,
                                       verbose: bool = True) -> pd.DataFrame:
     """
     This function is the multi threading wrapper that supplies _traditional_correlation_loop with quadruples.
@@ -29,8 +31,13 @@ def run_traditional_correlation_calcs(corr_matrix: pd.DataFrame, quadruples: lis
     :return: (pd.DataFrame) Quadruple with highest sum of correlations
     """
 
+    chunk_size = len(quadruples) // num_threads
+    quadruple_chunks = [quadruples[i:i + chunk_size] for i in range(0, len(quadruples), chunk_size)]
 
-    results = _traditional_correlation_loop(corr_matrix, quadruples)
+    with mp.Pool(num_threads) as p:
+        results_list = p.starmap(_traditional_correlation_loop, zip(repeat(corr_matrix), quadruple_chunks))
+
+    results = pd.concat(results_list)
 
     return results.iloc[results['result'].argmax()]
 
@@ -59,8 +66,13 @@ def run_extended_correlation_calcs(u: pd.DataFrame, quadruples: list, num_thread
     :param verbose: (bool) Flag to report progress on asynch jobs
     :return: (pd.DataFrame) Quadruple with highest multivariate correlation
     """
+    chunk_size = len(quadruples) // num_threads
+    quadruple_chunks = [quadruples[i:i + chunk_size] for i in range(0, len(quadruples), chunk_size)]
 
-    results = _extended_correlation_loop(u, quadruples)
+    with mp.Pool(num_threads) as p:
+        results_list = p.starmap(_extended_correlation_loop, zip(repeat(u), quadruple_chunks))
+
+    results = pd.concat(results_list)
 
     return results.iloc[results['result'].argmax()]
 
@@ -90,7 +102,13 @@ def run_diagonal_measure_calcs(ranked_returns: pd.DataFrame, quadruples: list, n
     :return: (pd.DataFrame) Quadruple with smallest diagonal measure
     """
 
-    results = _diagonal_measure_loop(ranked_returns, quadruples)
+    chunk_size = len(quadruples) // num_threads
+    quadruple_chunks = [quadruples[i:i + chunk_size] for i in range(0, len(quadruples), chunk_size)]
+
+    with mp.Pool(num_threads) as p:
+        results_list = p.starmap(_diagonal_measure_loop, zip(repeat(ranked_returns), quadruple_chunks))
+
+    results = pd.concat(results_list)
 
     return results.iloc[results['result'].argmin()]
 
@@ -122,6 +140,12 @@ def run_extremal_measure_calcs(ranked_returns: pd.DataFrame, quadruples: list, c
     :return: (pd.DataFrame) Quadruple with biggest extremal measure
     """
 
-    results = _extremal_measure_loop(ranked_returns, co_variance_matrix, quadruples)
+    chunk_size = len(quadruples) // num_threads
+    quadruple_chunks = [quadruples[i:i + chunk_size] for i in range(0, len(quadruples), chunk_size)]
+
+    with mp.Pool(num_threads) as p:
+        results_list = p.starmap(_extremal_measure_loop, zip(repeat(ranked_returns), repeat(co_variance_matrix), quadruple_chunks))
+
+    results = pd.concat(results_list)
 
     return results.iloc[results['result'].argmax()]

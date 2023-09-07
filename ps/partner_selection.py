@@ -144,7 +144,7 @@ class PartnerSelection:
     # Method 1
     def traditional_multiprocess(self, n_targets=5) -> list:
         """
-        Multiprocess implementation of self.traditional using mp_pandas_obj from mlfinlab.
+        Multiprocess implementation of self.traditional.
         This method implements the first procedure described in Section 3.1.1.
         For all possible quadruples of a given stock, we calculate the sum of all pairwise correlations.
         For every target stock the quadruple with the highest sum is returned.
@@ -203,7 +203,7 @@ class PartnerSelection:
     # Method 2
     def extended_multiprocess(self, n_targets=5) -> list:
         """
-        Multiprocess implementation of self.extended using mp_pandas_obj from mlfinlab.
+        Multiprocess implementation of self.extended.
         This method implements the second procedure described in Section 3.1.1.
         It involves calculating the multivariate version of Spearman's correlation
         for all possible quadruples of a given stock.
@@ -261,7 +261,7 @@ class PartnerSelection:
     # Method 3
     def geometric_multiprocess(self, n_targets=5) -> list:
         """
-        Multiprocess implementation of self.geometric using mp_pandas_obj from mlfinlab.
+        Multiprocess implementation of self.geometric.
         This method implements the third procedure described in Section 3.1.1.
         It involves calculating the four dimensional diagonal measure for all possible quadruples of a given stock.
         For every target stock the quadruple with the lowest diagonal measure is returned.
@@ -314,7 +314,7 @@ class PartnerSelection:
     # Method 4
     def extremal_multiprocess(self, n_targets=5) -> list:
         """
-        Multiprocess implementation of self.extremal using mp_pandas_obj from mlfinlab.
+        Multiprocess implementation of self.extremal.
         This method implements the fourth procedure described in Section 3.1.1.
         It involves calculating a non-parametric test statistic based on Mangold (2015) to measure the
         degree of deviation from independence. Main focus of this measure is the occurrence of joint extreme events.
